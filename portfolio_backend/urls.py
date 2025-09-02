@@ -39,7 +39,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     
-    # API URLs
+    # API URLs con versionado
     path('api/v1/auth/', include('accounts.urls')),
     path('api/v1/core/', include('core.urls')),
     path('api/v1/projects/', include('projects.urls')),
@@ -47,6 +47,15 @@ urlpatterns = [
     path('api/v1/services/', include('services.urls')),
     path('api/v1/blog/', include('blog.urls')),
     path('api/v1/contact/', include('contact.urls')),
+    
+    # URLs compatibles con frontend (sin api/v1 prefix)
+    path('auth/', include('accounts.urls')),
+    path('core/', include('core.urls')),
+    path('projects/', include('projects.urls')),
+    path('skills/', include('skills.urls')),
+    path('services/', include('services.urls')),
+    path('blog/', include('blog.urls')),
+    path('contact/', include('contact.urls')),
     
     # API Documentation
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
