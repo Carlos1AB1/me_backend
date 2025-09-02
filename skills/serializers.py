@@ -21,12 +21,7 @@ class SkillSerializer(serializers.ModelSerializer):
         Devuelve la URL completa de la imagen
         """
         if obj.image:
-            request = self.context.get('request')
-            if request:
-                return request.build_absolute_uri(obj.image.url)
-            else:
-                # Fallback para cuando no hay request en el contexto
-                return f"https://me-backend-vguc.onrender.com{obj.image.url}"
+            return obj.image.url
         return None
     
     def get_sub_image(self, obj):
@@ -34,12 +29,7 @@ class SkillSerializer(serializers.ModelSerializer):
         Devuelve la URL completa de la sub-imagen
         """
         if obj.sub_image:
-            request = self.context.get('request')
-            if request:
-                return request.build_absolute_uri(obj.sub_image.url)
-            else:
-                # Fallback para cuando no hay request en el contexto
-                return f"https://me-backend-vguc.onrender.com{obj.sub_image.url}"
+            return obj.sub_image.url
         return None
 
 class SkillCategorySerializer(serializers.ModelSerializer):

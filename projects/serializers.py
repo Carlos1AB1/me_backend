@@ -12,12 +12,8 @@ class ProjectImageSerializer(serializers.ModelSerializer):
         fields = ['id', 'image', 'order']
 
     def get_image(self, obj):
-        request = self.context.get('request')
         if obj.image:
-            if request:
-                return request.build_absolute_uri(obj.image.url)
-            # Devuelve la URL absoluta de producción por defecto
-            return f"https://me-backend-vguc.onrender.com{obj.image.url}"
+            return obj.image.url
         return None
 
 class ProjectSerializer(serializers.ModelSerializer):

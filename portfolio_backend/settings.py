@@ -54,6 +54,8 @@ THIRD_PARTY_APPS = [
     'corsheaders',
     'django_filters',
     'drf_yasg',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 LOCAL_APPS = [
@@ -166,14 +168,27 @@ STATICFILES_DIRS = [
 # WhiteNoise configuration
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files configuration
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# Cloudinary configuration
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
-# Configuración para URLs absolutas en producción
-if not DEBUG:
-    # En producción, usar el dominio de Render
-    MEDIA_URL = 'https://me-backend-vguc.onrender.com/media/'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default='your-cloud-name'),
+    'API_KEY': config('CLOUDINARY_API_KEY', default='your-api-key'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET', default='your-api-secret'),
+}
+
+cloudinary.config(
+    cloud_name=CLOUDINARY_STORAGE['CLOUD_NAME'],
+    api_key=CLOUDINARY_STORAGE['API_KEY'],
+    api_secret=CLOUDINARY_STORAGE['API_SECRET'],
+    secure=True
+)
+
+# Media files configuration using Cloudinary
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
