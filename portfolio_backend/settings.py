@@ -29,7 +29,10 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-mavz03bqqn^g7^n$pv88%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,*.onrender.com,me-backend-vguc.onrender.com').split(',')
+# Configurar ALLOWED_HOSTS de manera más robusta
+allowed_hosts = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+allowed_hosts.extend(['me-backend-vguc.onrender.com', '.onrender.com'])
+ALLOWED_HOSTS = allowed_hosts
 
 # Custom User Model
 AUTH_USER_MODEL = 'accounts.CustomUser'
