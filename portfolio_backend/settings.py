@@ -225,7 +225,7 @@ SIMPLE_JWT = {
 # CORS Settings
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
-    default='http://localhost:3000,http://127.0.0.1:3000'
+    default='http://localhost:3000,http://127.0.0.1:3000,https://frontend-7p3k97by2-carlos1ab1s-projects.vercel.app'
 ).split(',')
 
 CORS_ALLOW_CREDENTIALS = True
