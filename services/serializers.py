@@ -40,7 +40,7 @@ class ServiceListSerializer(serializers.ModelSerializer):
             if request:
                 return request.build_absolute_uri(obj.image.url)
             else:
-                return f"http://127.0.0.1:8000{obj.image.url}"
+                return f"https://me-backend-vguc.onrender.com{obj.image.url}"
         return None
 
     def get_price_display(self, obj):
@@ -84,7 +84,7 @@ class ServiceDetailSerializer(serializers.ModelSerializer):
             if request:
                 return request.build_absolute_uri(obj.image.url)
             else:
-                return f"http://127.0.0.1:8000{obj.image.url}"
+                return f"https://me-backend-vguc.onrender.com{obj.image.url}"
         return None
 
     def get_price_display(self, obj):

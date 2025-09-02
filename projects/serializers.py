@@ -16,8 +16,8 @@ class ProjectImageSerializer(serializers.ModelSerializer):
         if obj.image:
             if request:
                 return request.build_absolute_uri(obj.image.url)
-            # Devuelve la URL absoluta por defecto
-            return f"http://127.0.0.1:8000{obj.image.url}"
+            # Devuelve la URL absoluta de producción por defecto
+            return f"https://me-backend-vguc.onrender.com{obj.image.url}"
         return None
 
 class ProjectSerializer(serializers.ModelSerializer):

@@ -26,7 +26,7 @@ class SkillSerializer(serializers.ModelSerializer):
                 return request.build_absolute_uri(obj.image.url)
             else:
                 # Fallback para cuando no hay request en el contexto
-                return f"http://127.0.0.1:8000{obj.image.url}"
+                return f"https://me-backend-vguc.onrender.com{obj.image.url}"
         return None
     
     def get_sub_image(self, obj):
@@ -39,7 +39,7 @@ class SkillSerializer(serializers.ModelSerializer):
                 return request.build_absolute_uri(obj.sub_image.url)
             else:
                 # Fallback para cuando no hay request en el contexto
-                return f"http://127.0.0.1:8000{obj.sub_image.url}"
+                return f"https://me-backend-vguc.onrender.com{obj.sub_image.url}"
         return None
 
 class SkillCategorySerializer(serializers.ModelSerializer):
