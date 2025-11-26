@@ -31,7 +31,11 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 
 # Configurar ALLOWED_HOSTS de manera más robusta
 allowed_hosts = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
-allowed_hosts.extend(['me-backend-vguc.onrender.com', '.onrender.com'])
+allowed_hosts.extend([
+    'me-backend-vguc.onrender.com', 
+    '.onrender.com',
+    '.pythonanywhere.com',  # Para PythonAnywhere
+])
 ALLOWED_HOSTS = allowed_hosts
 
 # Custom User Model
@@ -114,15 +118,33 @@ DATABASES = {
     }
 }
 
-# Base de datos para producción (PostgreSQL)
+# Base de datos para producción
 DATABASE_URL = config('DATABASE_URL', default=None)
-if DATABASE_URL:
+DB_ENGINE = config('DB_ENGINE', default=None)
+
+# Para PostgreSQL (Render, Railway, etc.)
+if DATABASE_URL and not DB_ENGINE:
     import dj_database_url
     DATABASES['default'] = dj_database_url.config(
         default=DATABASE_URL,
         conn_max_age=600,
         conn_health_checks=True,
     )
+
+# Para MySQL (PythonAnywhere)
+elif DB_ENGINE == 'mysql':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST', default='localhost'),
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            }
+        }
+    }
 
 
 # Password validation
