@@ -1,0 +1,100 @@
+===========================================
+COMANDOS PARA PYTHONANYWHERE
+===========================================
+
+COPIAR Y PEGAR ESTOS COMANDOS UNO POR UNO EN LA CONSOLA BASH:
+
+-------------------------------------------
+1. IR AL DIRECTORIO Y ACTIVAR VIRTUALENV
+-------------------------------------------
+
+cd ~/me_backend && workon portfolio_env
+
+
+-------------------------------------------
+2. FORZAR ACTUALIZACIÓN DEL CÓDIGO
+-------------------------------------------
+
+git fetch origin && git reset --hard origin/main
+
+
+-------------------------------------------
+3. VERIFICAR QUE SE ACTUALIZÓ
+-------------------------------------------
+
+git log --oneline -1
+
+
+DEBE MOSTRAR:
+"Fix: Deshabilitar Cloudinary y usar almacenamiento local"
+
+
+-------------------------------------------
+4. VERIFICAR CONFIGURACIÓN
+-------------------------------------------
+
+grep "DEFAULT_FILE_STORAGE" portfolio_backend/settings.py
+
+
+DEBE MOSTRAR CON # AL INICIO:
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+-------------------------------------------
+5. VERIFICAR MEDIA_ROOT
+-------------------------------------------
+
+grep "MEDIA_ROOT" portfolio_backend/settings.py
+
+
+DEBE MOSTRAR:
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
+-------------------------------------------
+6. APLICAR MIGRACIONES
+-------------------------------------------
+
+python manage.py migrate
+
+
+-------------------------------------------
+7. VERIFICAR EN DJANGO
+-------------------------------------------
+
+python manage.py shell << 'EOF'
+from django.conf import settings
+print("Storage:", getattr(settings, 'DEFAULT_FILE_STORAGE', 'FileSystemStorage'))
+print("MEDIA_ROOT:", settings.MEDIA_ROOT)
+exit()
+EOF
+
+
+DEBE MOSTRAR:
+Storage: django.core.files.storage.FileSystemStorage
+MEDIA_ROOT: /home/cabaron23/me_backend/media
+
+
+-------------------------------------------
+8. VERIFICAR PERMISOS DE MEDIA
+-------------------------------------------
+
+chmod -R 755 ~/me_backend/media
+
+
+-------------------------------------------
+9. DESPUÉS DE TODO ESTO:
+-------------------------------------------
+
+Ve a la Web tab → Click en "Reload cabaron23.pythonanywhere.com"
+
+
+-------------------------------------------
+10. PROBAR
+-------------------------------------------
+
+Ve al admin y sube una imagen en Projects o Services.
+Ya NO debe dar error de Cloudinary.
+
+===========================================
+
