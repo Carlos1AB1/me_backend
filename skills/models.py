@@ -35,8 +35,10 @@ class Skill(models.Model):
     level = models.CharField(max_length=20, choices=LEVEL_CHOICES, verbose_name='Nivel')
     icon = models.CharField(max_length=50, blank=True, help_text='Emoji o clase CSS', verbose_name='Icono')
     image = models.ImageField(upload_to='skills/', blank=True, null=True, verbose_name='Imagen')
+    image_url = models.URLField(max_length=500, blank=True, help_text='URL de imagen externa (CDN, etc)', verbose_name='URL de Imagen')
     sub_icon = models.CharField(max_length=50, blank=True, help_text='Emoji o clase CSS para tecnología relacionada (ej: Spring para Java)', verbose_name='Sub-Icono')
     sub_image = models.ImageField(upload_to='skills/sub/', blank=True, null=True, verbose_name='Sub-Imagen')
+    sub_image_url = models.URLField(max_length=500, blank=True, help_text='URL de sub-imagen externa', verbose_name='URL de Sub-Imagen')
     color = models.CharField(
         max_length=7, 
         default='#74b9ff', 

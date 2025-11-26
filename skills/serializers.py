@@ -12,14 +12,18 @@ class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
         fields = [
-            'id', 'name', 'category', 'category_name', 'level', 'icon', 'image', 'sub_icon', 'sub_image', 'color', 'gradient_type', 'gradient_css', 'background_type',
+            'id', 'name', 'category', 'category_name', 'level', 'icon', 'image', 'image_url', 'sub_icon', 'sub_image', 'sub_image_url', 'color', 'gradient_type', 'gradient_css', 'background_type',
             'description', 'years_experience', 'is_featured', 'order'
         ]
     
     def get_image(self, obj):
         """
-        Devuelve la URL absoluta de la imagen
+        Devuelve la URL de la imagen (prioriza URL externa sobre archivo)
         """
+        # Priorizar URL externa
+        if obj.image_url:
+            return obj.image_url
+        # Fallback a imagen subida
         if obj.image:
             request = self.context.get('request')
             if request:
@@ -29,8 +33,12 @@ class SkillSerializer(serializers.ModelSerializer):
     
     def get_sub_image(self, obj):
         """
-        Devuelve la URL absoluta de la sub-imagen
+        Devuelve la URL de la sub-imagen (prioriza URL externa sobre archivo)
         """
+        # Priorizar URL externa
+        if obj.sub_image_url:
+            return obj.sub_image_url
+        # Fallback a imagen subida
         if obj.sub_image:
             request = self.context.get('request')
             if request:
