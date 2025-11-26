@@ -49,7 +49,8 @@ class Project(models.Model):
 # Nuevo modelo para imágenes múltiples por proyecto
 class ProjectImage(models.Model):
     project = models.ForeignKey(Project, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='project_images/')
+    image = models.ImageField(upload_to='project_images/', blank=True, null=True)
+    image_url = models.URLField(max_length=500, blank=True, help_text='URL de imagen externa (ImgBB, GitHub, etc)')
     order = models.PositiveIntegerField(default=0, help_text='Orden de la imagen en la galería')
 
     class Meta:

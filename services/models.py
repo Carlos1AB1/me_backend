@@ -64,6 +64,7 @@ class Service(models.Model):
         null=True,
         verbose_name="Imagen"
     )
+    image_url = models.URLField(max_length=500, blank=True, help_text='URL de imagen externa', verbose_name='URL de Imagen')
     
     # Pricing
     price_type = models.CharField(

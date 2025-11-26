@@ -12,6 +12,10 @@ class ProjectImageSerializer(serializers.ModelSerializer):
         fields = ['id', 'image', 'order']
 
     def get_image(self, obj):
+        # Priorizar URL externa
+        if obj.image_url:
+            return obj.image_url
+        # Fallback a imagen subida
         if obj.image:
             request = self.context.get('request')
             if request:
