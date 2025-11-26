@@ -33,6 +33,9 @@ class ServiceListSerializer(serializers.ModelSerializer):
 
     def get_image(self, obj):
         if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
             return obj.image.url
         return None
 
@@ -70,6 +73,9 @@ class ServiceDetailSerializer(serializers.ModelSerializer):
 
     def get_image(self, obj):
         if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
             return obj.image.url
         return None
 

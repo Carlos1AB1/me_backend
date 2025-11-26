@@ -39,7 +39,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
             if request:
                 return request.build_absolute_uri(obj.featured_image.url)
             else:
-                return f"obj.featured_image.url"
+                return obj.featured_image.url
         return None
 
     def create(self, validated_data):
@@ -71,5 +71,5 @@ class BlogPostListSerializer(serializers.ModelSerializer):
             if request:
                 return request.build_absolute_uri(obj.featured_image.url)
             else:
-                return f"obj.featured_image.url"
+                return obj.featured_image.url
         return None

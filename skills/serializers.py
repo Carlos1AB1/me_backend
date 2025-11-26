@@ -18,17 +18,23 @@ class SkillSerializer(serializers.ModelSerializer):
     
     def get_image(self, obj):
         """
-        Devuelve la URL completa de la imagen
+        Devuelve la URL absoluta de la imagen
         """
         if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
             return obj.image.url
         return None
     
     def get_sub_image(self, obj):
         """
-        Devuelve la URL completa de la sub-imagen
+        Devuelve la URL absoluta de la sub-imagen
         """
         if obj.sub_image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.sub_image.url)
             return obj.sub_image.url
         return None
 
