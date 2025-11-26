@@ -1,0 +1,31 @@
+================================================================================
+COMANDO ÚNICO PARA PYTHONANYWHERE
+================================================================================
+
+COPIA Y PEGA ESTE COMANDO EN UNA CONSOLA BASH DE PYTHONANYWHERE:
+
+cd ~/me_backend && source ~/.virtualenvs/portfolio_env/bin/activate && git fetch origin && git reset --hard origin/main && find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true && python manage.py makemigrations projects services && python manage.py migrate && echo "" && echo "========================================" && echo "✅ ACTUALIZACIÓN COMPLETADA" && echo "========================================" && echo "" && echo "🔄 AHORA:" && echo "   1. Ve a la Web tab" && echo "   2. Click en Reload" && echo "" && echo "✅ LUEGO verás en el admin:" && echo "   - Skills: campo 'URL de Imagen'" && echo "   - Projects: campo 'Image url'" && echo "   - Services: campo 'URL de Imagen'" && echo ""
+
+
+DESPUÉS DE EJECUTAR EL COMANDO:
+1. Ve a Web tab
+2. Click en "Reload cabaron23.pythonanywhere.com"
+3. Ve al admin: https://cabaron23.pythonanywhere.com/admin/
+4. Edita un Skill/Project/Service
+5. Verás el campo "URL de Imagen"
+6. Pega una URL de imagen externa
+7. ¡Listo! ✅
+
+
+URLS DE EJEMPLO PARA PROBAR:
+- Java: https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg
+- Python: https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg
+- React: https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg
+
+
+O SUBE TUS PROPIAS IMÁGENES A:
+- ImgBB: https://imgbb.com (no requiere cuenta)
+- GitHub: assets/images/ de tu repo
+
+================================================================================
+
