@@ -107,7 +107,9 @@ class ServiceAdmin(admin.ModelAdmin):
         """
         Muestra una vista previa de la imagen en el admin
         """
-        if obj.image:
+        if obj.image_url:
+            return mark_safe(f'<img src="{obj.image_url}" width="50" height="50" style="object-fit: cover; border-radius: 4px;" />')
+        elif obj.image:
             return mark_safe(f'<img src="{obj.image.url}" width="50" height="50" style="object-fit: cover; border-radius: 4px;" />')
         return "Sin imagen"
     image_preview.short_description = "Vista previa"
@@ -122,7 +124,7 @@ class ServiceAdmin(admin.ModelAdmin):
     
     fieldsets = (
         ('Información básica', {
-            'fields': ('title', 'slug', 'category', 'description', 'short_description', 'icon', 'image', 'image_preview')
+            'fields': ('title', 'slug', 'category', 'description', 'short_description', 'icon', 'image', 'image_url', 'image_preview')
         }),
         ('Precio', {
             'fields': ('price_type', 'price_from', 'price_offer', 'price_currency', 'show_price')

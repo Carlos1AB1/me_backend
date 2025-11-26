@@ -5,8 +5,13 @@ from .models import Project, ProjectImage
 class ProjectImageInline(admin.TabularInline):
     model = ProjectImage
     extra = 1
-    fields = ('image', 'order',)
+    fields = ('image', 'image_url', 'order',)
     ordering = ('order',)
+    
+    class Media:
+        css = {
+            'all': ('admin/css/custom_admin.css',)
+        }
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
