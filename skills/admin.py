@@ -32,6 +32,10 @@ class SkillAdmin(admin.ModelAdmin):
         """
         Muestra una vista previa de la imagen en el admin
         """
+        # Priorizar URL externa
+        if obj.image_url:
+            return mark_safe(f'<img src="{obj.image_url}" width="50" height="50" style="object-fit: cover; border-radius: 4px;" />')
+        # Fallback a imagen subida
         if obj.image:
             return mark_safe(f'<img src="{obj.image.url}" width="50" height="50" style="object-fit: cover; border-radius: 4px;" />')
         return "Sin imagen"
@@ -60,7 +64,20 @@ class SkillAdmin(admin.ModelAdmin):
             'fields': ('name', 'category', 'level', 'description')
         }),
         ('Visualización', {
-            'fields': ('icon', 'image', 'image_preview', 'sub_icon', 'sub_image', 'background_type', 'color', 'gradient_type', 'gradient_css')
+            'fields': (
+                'icon', 
+                'image', 
+                'image_url',  # URL de imagen externa
+                'image_preview', 
+                'sub_icon', 
+                'sub_image',
+                'sub_image_url',  # URL de sub-imagen externa
+                'background_type', 
+                'color', 
+                'gradient_type', 
+                'gradient_css'
+            ),
+            'description': 'Usa "URL de Imagen" para iconos de internet (recomendado) o "Imagen" para subir archivos.'
         }),
         ('Configuración', {
             'fields': ('years_experience', 'is_featured', 'order')
