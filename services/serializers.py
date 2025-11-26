@@ -32,6 +32,10 @@ class ServiceListSerializer(serializers.ModelSerializer):
         ]
 
     def get_image(self, obj):
+        # Priorizar URL externa
+        if obj.image_url:
+            return obj.image_url
+        # Fallback a imagen subida
         if obj.image:
             request = self.context.get('request')
             if request:
@@ -72,6 +76,10 @@ class ServiceDetailSerializer(serializers.ModelSerializer):
         ]
 
     def get_image(self, obj):
+        # Priorizar URL externa
+        if obj.image_url:
+            return obj.image_url
+        # Fallback a imagen subida
         if obj.image:
             request = self.context.get('request')
             if request:
