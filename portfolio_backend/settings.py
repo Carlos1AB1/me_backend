@@ -208,9 +208,11 @@ cloudinary.config(
     secure=True
 )
 
-# Media files configuration using Cloudinary
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# Media files configuration
+# Usar almacenamiento local en lugar de Cloudinary (PythonAnywhere free no soporta Cloudinary)
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
